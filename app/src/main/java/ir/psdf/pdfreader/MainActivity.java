@@ -1,17 +1,22 @@
 package ir.psdf.pdfreader;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
+
 
     EditText material_edit;
     EditText angle_of_surcharge;
@@ -36,6 +41,27 @@ public class MainActivity extends AppCompatActivity {
     EditText feed4;
     EditText editTextNumberDecimal;
     EditText belt_width;
+    public static final String[] pdfFileNames = {
+            "tab-1.pdf",
+            "tab-2.pdf",
+            "tab-3.pdf",
+            "tab-4.pdf",
+            "tab-5.pdf",
+            "tab-7.pdf",
+            "tab-8.pdf",
+            "tab-9.pdf",
+            "tab-10.pdf",
+            "tab-11.pdf",
+            "tab-16.pdf",
+            "tab-17.pdf",
+            "tab-18.pdf",
+            "tab-19.pdf",
+            "tab-20.pdf",
+            "tab-21.pdf",
+            "fig-8.pdf",
+            "physical_properties.pdf",
+            "roler_set.pdf"
+    };
     EditText belt_width2;
     EditText impact_factor;
     EditText utilisation;
@@ -107,12 +133,652 @@ public class MainActivity extends AppCompatActivity {
     Button tab8;
     Button tab11;
     Button tab18;
+    EditText min_belt_width;
+
+    public static boolean checkDouble(String numericString) {
+        if (numericString == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(numericString);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    public void update_load_on_the_rollers_of_the_return_roller_set() {
+        int inputNumber = 2;
+        View[] views = {dynamic_load_on_the_return_roller_set,
+                participation_factor_in_return,
+        };
+        String[] defaults = {"31.087792", "1"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1];
+            stringAns = String.valueOf(doubleAns);
+            load_on_the_rollers_of_the_return_roller_set.setText(stringAns);
+        }
+    }
+
+    public void update_dynamic_load_on_the_return_roller_set() { // F199 was not assigned here on phase 1
+        int inputNumber = 2;
+        View[] views = {static_load_on_the_return_roller_set,
+                service_factor,
+                environment_factor,
+                speed_factor
+        };
+        String[] defaults = {"29.1357", "1.1", "1", "0.97"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1] * doubleValues[2] * doubleValues[3];
+            stringAns = String.valueOf(doubleAns);
+            dynamic_load_on_the_return_roller_set.setText(stringAns);
+        }
+    }
+
+    public void update_static_load_on_the_return_roller_set() { // F199 was not assigned here on phase 1
+        int inputNumber = 1;
+        View[] views = {Belt_weight_per_linear_metre
+        };
+        String[] defaults = {"9.9"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = 3 * doubleValues[0] * 0.981;
+            stringAns = String.valueOf(doubleAns);
+            static_load_on_the_return_roller_set.setText(stringAns);
+        }
+    }
+
+    public void update_load_on_the_roller_carrying_the_most_force() {
+        int inputNumber = 2;
+        View[] views = {dynamic_load,
+                participation_factor_in_upper
+        };
+        String[] defaults = {"174.2873", "0.65"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1];
+            stringAns = String.valueOf(doubleAns);
+            load_on_the_roller_carrying_the_most_force.setText(stringAns);
+        }
+    }
+
+    public void update_dynamic_load() {
+        int inputNumber = 4;
+        View[] views = {static_load,
+                impact_factor,
+                service_factor,
+                environment_factor
+        };
+        String[] defaults = {"153.8281", "1.03", "1.1", "1"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1] * doubleValues[2] * doubleValues[3];
+            stringAns = String.valueOf(doubleAns);
+            dynamic_load.setText(stringAns);
+        }
+    }
+
+    public void update_static_load() {  //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ F198 = 1.2 was not assigned in project phase1
+        int inputNumber = 3;
+        View[] views = {Belt_weight_per_linear_metre,
+                load_capacity_of_the_belt_final,
+                v_max_from_table
+        };
+        String[] defaults = {"9.9", "1000", "2.3"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = 1.2 * (doubleValues[0] + (doubleValues[1] / (3.6 * doubleValues[2]))) * 0.981;
+            stringAns = String.valueOf(doubleAns);
+            static_load.setText(stringAns);
+        }
+    }
+
+    public void update_modified_loaded_volume2() {
+        int inputNumber = 3;
+        View[] views = {loaded_volume1,
+                correction_factor,
+                factor_of_inclination
+        };
+        String[] defaults = {"2000", "0.9", "0.98"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1] * doubleValues[2];
+            stringAns = String.valueOf(doubleAns);
+            modified_loaded_volume2.setText(stringAns);
+        }
+    }
+
+    public void update_modified_loaded_volume1() {
+        int inputNumber = 3;
+        View[] views = {loaded_volume1,
+                correction_factor,
+                factor_of_inclination
+        };
+        String[] defaults = {"410.7923", "0.9", "0.98"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] * doubleValues[1] * doubleValues[2];
+            stringAns = String.valueOf(doubleAns);
+            modified_loaded_volume1.setText(stringAns);
+        }
+    }
+
+    public void update_correction_factor() {
+        int inputNumber = 1;
+        View[] views = {feed1};
+        String[] defaults = {"3"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            if (stringValues[0].equals("1")) {
+                stringAns = "1";
+            } else if (stringValues[0].equals("2")) {
+                stringAns = "0.95";
+            } else if (stringValues[0].equals("3")) {
+                stringAns = "0.9";
+            } else {
+                stringAns = String.valueOf(false);
+            }
+
+            correction_factor.setText(stringAns);
+        }
+    }
+
+    public void update_loaded_volume1() {
+        int inputNumber = 4;
+        View[] views = {loaded_volume,
+                v_max_from_table,
+                factor_of_inclination,
+                correction_factor
+        };
+        String[] defaults = {"833.333", "2.3", "0.98", "0.9"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / (doubleValues[1] * doubleValues[2] * doubleValues[3]);
+
+
+            stringAns = String.valueOf(doubleAns);
+            loaded_volume1.setText(stringAns);
+        }
+
+    }
+
+    public void update_loaded_volume() {
+
+        int inputNumber = 2;
+        View[] views = {load_capacity_of_the_belt_final,
+                specific_weight};
+        String[] defaults = {"1000", "1.2"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                Log.d("TAG", "i = " + i);
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is edit text");
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is text view");
+                }
+                Log.d("TAG", "views[i] text = " + text);
+                if (text.isEmpty()) {
+                    Log.d("TAG", "views[i] text is empty so it must replace with default value");
+                    Log.d("TAG", "views[i] default value = " + defaults[i]);
+                    stringValues[i] = defaults[i];
+                    Log.d("TAG", "now the value must be change to string value[i] = " + stringValues[i]);
+
+                } else {
+                    stringValues[i] = text;
+                    Log.d("TAG", "views[i] text is not empty and the value is = " + stringValues[i]);
+                }
+                if (checkDouble(stringValues[i])) {
+                    Log.d("TAG", "value is double so I put it in the doubleValues");
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                    Log.d("TAG", "doubleValue[i] = " + doubleValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / doubleValues[1];
+            stringAns = String.valueOf(doubleAns);
+
+
+            loaded_volume.setText(stringAns);
+        }
+
+    }
+
+    public void update_roll_troughing_sets() {
+        int inputNumber = 1;
+        View[] views = {design_of_the_troughing_sets};
+        String[] defaults = {"4"};
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                Log.d("TAG", "i = " + i);
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is edit text");
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is text view");
+                }
+                Log.d("TAG", "views[i] text = " + text);
+                if (text.isEmpty()) {
+                    Log.d("TAG", "views[i] text is empty so it must replace with default value");
+                    Log.d("TAG", "views[i] default value = " + defaults[i]);
+                    stringValues[i] = defaults[i];
+                    Log.d("TAG", "now the value must be change to string value[i] = " + stringValues[i]);
+
+                } else {
+                    stringValues[i] = text;
+                    Log.d("TAG", "views[i] text is not empty and the value is = " + stringValues[i]);
+                }
+                if (checkDouble(stringValues[i])) {
+                    Log.d("TAG", "value is double so I put it in the doubleValues");
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                    Log.d("TAG", "doubleValue[i] = " + doubleValues[i]);
+                }
+            }
+
+            //now work with values
+            String stringAns;
+            switch (stringValues[0]) {
+                case "1":
+                    stringAns = "flat roller set";
+                    break;
+                case "2":
+                    stringAns = "2 roller troughing sets";
+                    break;
+                case "3":
+                    stringAns = "3 roll troughing sets";
+                    break;
+                case "4":
+                    stringAns = "roll troughing sets";
+                    break;
+                default:
+                    stringAns = "false";
+            }
+            roll_troughing_sets.setText(stringAns);
+        }
+    }
+
+    public void update_load_capacity_of_the_belt_final() {
+
+        int inputNumber = 2;
+        View[] views = {load_capacity_of_the_belt,
+                load_capacity_of_the_belt_stph};
+        String[] defaults = {"1000", "0"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                Log.d("TAG", "i = " + i);
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is edit text");
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                    Log.d("TAG", "views[i] is text view");
+                }
+                Log.d("TAG", "views[i] text = " + text);
+                if (text.isEmpty()) {
+                    Log.d("TAG", "views[i] text is empty so it must replace with default value");
+                    Log.d("TAG", "views[i] default value = " + defaults[i]);
+                    stringValues[i] = defaults[i];
+                    Log.d("TAG", "now the value must be change to string value[i] = " + stringValues[i]);
+
+                } else {
+                    stringValues[i] = text;
+                    Log.d("TAG", "views[i] text is not empty and the value is = " + stringValues[i]);
+                }
+                if (checkDouble(stringValues[i])) {
+                    Log.d("TAG", "value is double so I put it in the doubleValues");
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                    Log.d("TAG", "doubleValue[i] = " + doubleValues[i]);
+                }
+            }
+
+            //now work with values
+            String stringAns;
+            double doubleAns;
+            if (doubleValues[0] > 0) {
+                stringAns = stringValues[0];
+            } else if (doubleValues[1] > 0) {
+                stringAns = String.valueOf(doubleValues[1] * 0.9072);
+            } else {
+                stringAns = String.valueOf(false);
+            }
+
+            load_capacity_of_the_belt_final.setText(stringAns);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         material_edit = findViewById(R.id.material_edit);
         angle_of_surcharge = findViewById(R.id.angle_of_surcharge);
         angle_of_repose = findViewById(R.id.angle_of_repose);
@@ -136,6 +802,7 @@ public class MainActivity extends AppCompatActivity {
         feed4 = findViewById(R.id.feed4);
         editTextNumberDecimal = findViewById(R.id.breaking_load);
         belt_width = findViewById(R.id.belt_width);
+        min_belt_width = findViewById(R.id.min_belt_width);
         belt_width2 = findViewById(R.id.belt_width2);
         impact_factor = findViewById(R.id.impact_factor);
         utilisation = findViewById(R.id.utilisation);
@@ -209,230 +876,555 @@ public class MainActivity extends AppCompatActivity {
         tab18 = findViewById(R.id.tab18);
 
 
-        tab1.setOnClickListener(new View.OnClickListener() {
+        material_edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+            }
+        });
+
+        angle_of_surcharge.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        angle_of_repose.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        lump_size.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        specific_weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_loaded_volume();
+            }
+        });
+
+        abrasiveness.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        corrosiveness.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        physical_characteristics.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        v_max_from_table.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_loaded_volume1();
+                update_static_load();
+            }
+        });
+
+        v_max_desired.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        load_capacity_of_the_belt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_load_capacity_of_the_belt_final();
+            }
+        });
+
+        load_capacity_of_the_belt_stph.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_load_capacity_of_the_belt_final();
+            }
+        });
+
+        lambda.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        design_of_the_troughing_sets.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_roll_troughing_sets();
+            }
+        });
+
+        loaded_volume2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        inclination.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        factor_of_inclination.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_loaded_volume1();
+                update_modified_loaded_volume1();
+                update_modified_loaded_volume2();
+            }
+        });
+
+        feed1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_correction_factor();
+            }
+        });
+
+        feed2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        feed3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        feed4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        belt_width.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        belt_width2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        impact_factor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_dynamic_load();
+            }
+        });
+
+
+        utilisation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        service_factor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_dynamic_load();
+                update_dynamic_load_on_the_return_roller_set();
+            }
+        });
+
+        environment_factor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_dynamic_load();
+                update_dynamic_load_on_the_return_roller_set();
+            }
+        });
+
+        participation_factor_in_upper.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_load_on_the_roller_carrying_the_most_force();
+            }
+        });
+
+        speed_factor.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_dynamic_load_on_the_return_roller_set();
+            }
+        });
+
+        return_troughing_set_with_a_transom_side_roller_angle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        participation_factor_in_return.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                update_load_on_the_rollers_of_the_return_roller_set();
+            }
+        });
+
+        diameter_of_rollers.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        belt_kind.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        textile_core_EP.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        steel_core_ST.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Belt_core_weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        thickness_of_belt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        working_condition.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Coefficient_of_internal_friction.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Coefficient_of_fixed_resistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        temperature.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Coefficient_of_passive_resistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Maximum_advised_pitch_of_troughing_sets.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        weight_of_upper_rotating.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        weight_of_lower_rotating.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        Height_change_of_belt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        center_to_center.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+        efficiency_of_the_reduction.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+
+            }
+        });
+
+
+        clickToOpenPdf(tab1, "tab-1.pdf");
+
+        clickToOpenPdf(tab2, "tab-2.pdf");
+
+        clickToOpenPdf(tab3, "tab-3.pdf");
+
+        clickToOpenPdf(tab4, "tab-4.pdf");
+
+        clickToOpenPdf(tab5, "tab-5.pdf");
+
+        clickToOpenPdf(tab7, "tab-7.pdf");
+
+        clickToOpenPdf(tab8, "tab-8.pdf");
+
+        clickToOpenPdf(tab9, "tab-9.pdf");
+
+        clickToOpenPdf(tab10, "tab-10.pdf");
+
+        clickToOpenPdf(tab11, "tab-11.pdf");
+
+        clickToOpenPdf(tab16, "tab-16.pdf");
+
+        clickToOpenPdf(tab17, "tab-17.pdf");
+
+        clickToOpenPdf(tab18, "tab-18.pdf");
+
+        clickToOpenPdf(tab19, "tab-19.pdf");
+
+        clickToOpenPdf(tab20, "tab-20.pdf");
+
+        clickToOpenPdf(tab21, "tab-21.pdf");
+
+        clickToOpenPdf(fig8, "fig-8.pdf");
+
+        clickToOpenPdf(roller_button, "roler_set.pdf");
+
+        clickToOpenPdf(physical_characteristics_button, "physical_properties.pdf");
+
+        dynamic_load_on_the_return_roller_set.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_load_on_the_rollers_of_the_return_roller_set();
+            }
+        });
+        static_load_on_the_return_roller_set.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_dynamic_load_on_the_return_roller_set();
+            }
+        });
+        dynamic_load.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_load_on_the_roller_carrying_the_most_force();
+            }
+        });
+
+        static_load.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_dynamic_load();
+            }
+        });
+        Belt_weight_per_linear_metre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_static_load();
+                update_static_load_on_the_return_roller_set();
+            }
+        });
+        loaded_volume1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_modified_loaded_volume1();
+                update_modified_loaded_volume2();
+            }
+        });
+        correction_factor.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_loaded_volume1();
+                update_modified_loaded_volume1();
+                update_modified_loaded_volume2();
+            }
+        });
+        load_capacity_of_the_belt_final.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_loaded_volume();
+                update_static_load();
+            }
+        });
+
+        loaded_volume.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_loaded_volume1();
+            }
+        });
+    }
+
+    private void clickToOpenPdf(Button button, final String pdfName) {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-1.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                openPdf(pdfName);
 
             }
 
         });
+    }
 
-        tab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-2.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-
-        });
-
-        tab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-3.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-4.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-5.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-7.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-8.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-9.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-10.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab11.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-11.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab16.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-16.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab17.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-17.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab18.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-18.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab19.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-19.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-
-        });
-
-        tab20.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-20.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        tab21.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "tab-21.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        fig8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "fig-8.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        roller_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "roler_set.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
-
-        physical_characteristics_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(FileProvider.CONTENT_URI + "physical_properties.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-
-            }
-
-        });
+    private void openPdf(String pdfName) {
+        Uri uri = Uri.parse(FileProvider.CONTENT_URI + pdfName);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
