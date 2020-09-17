@@ -52,6 +52,13 @@
                 android:textColor="#000000"
                 android:textSize="17sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="material ex: clinker">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/material_edit"
@@ -61,6 +68,13 @@
                 android:hint="material ex: clinker"
                 android:inputType="text" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="angle of surcharge ex: 20 (deg)">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/angle_of_surcharge"
@@ -69,6 +83,13 @@
                 android:ems="10"
                 android:hint="angle of surcharge ex: 20 (deg)"
                 android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="angle of repose ex: 30 (deg)">
+
+            </TextView>
 
 
             <EditText
@@ -97,6 +118,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lump size ex: 80-150 (mm)">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/lump_size"
@@ -106,6 +134,13 @@
                 android:hint="lump size ex: 80-150 (mm)"
                 android:inputType="text" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="specific weight (t/m3). ex: 1.2 ">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/specific_weight"
@@ -114,6 +149,13 @@
                 android:ems="10"
                 android:hint="specific weight (t/m3). ex: 1.2 "
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abrasiveness ex: C">
+
+            </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -177,6 +219,13 @@
                 android:textColor="#000000"
                 android:textSize="17sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="physical characteristics ex: A">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/physical_characteristics"
                 android:layout_width="match_parent"
@@ -197,6 +246,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="V max from table ex: 2 (m/s)">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/v_max_from_table"
@@ -205,6 +261,13 @@
                 android:ems="10"
                 android:hint="V max from table ex: 2 (m/s)"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="V max desired ex: 2.3 (m/s)">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/v_max_desired"
@@ -234,6 +297,13 @@
                 android:textColor="#000000"
                 android:textSize="17sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="load capacity of the belt ex:1000 t/hr">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/load_capacity_of_the_belt"
@@ -242,6 +312,13 @@
                 android:ems="10"
                 android:hint="load capacity of the belt ex:1000 t/hr"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="load capacity of the belt ex:0 stph ">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/load_capacity_of_the_belt_stph"
@@ -281,6 +358,13 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="carrying troughing set with a transom side roller angle: lambda (Deg) ex: 30">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/lambda"
@@ -289,6 +373,13 @@
                 android:ems="10"
                 android:hint="carrying troughing set with a transom side roller angle: lambda (Deg) ex: 30"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="design of the troughing sets ex:4">
+
+            </TextView>
 
 
             <EditText
@@ -340,6 +431,13 @@
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="loaded volume ex: 2000 (m3/hr)">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/loaded_volume2"
@@ -349,6 +447,13 @@
                 android:hint="loaded volume ex: 2000 (m3/hr)"
                 android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="inclination ex: 6 (deg)">
+
+            </TextView>
+
 
             <EditText
                 android:id="@+id/inclination"
@@ -357,6 +462,13 @@
                 android:ems="10"
                 android:hint="inclination ex: 6 (deg)"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="inclination factor from fig8 ex: 0.98">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/factor_of_inclination"
@@ -382,6 +494,13 @@
                 android:layout_height="wrap_content"
                 android:text="feed( contains 3 variable)" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="feed it's self ex: 3">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/feed1"
                 android:layout_width="match_parent"
@@ -390,28 +509,49 @@
                 android:hint="feed it's self ex: 3"
                 android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="regular ex: 1">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/feed2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="regular"
+                android:hint="regular ex: 1"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="irregular ex: 2">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/feed3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="irregular"
+                android:hint="irregular ex: 2"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="most irregular  ex: 3">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/feed4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="most irregular"
+                android:hint="most irregular "
                 android:inputType="numberDecimal" />
 
             <TextView
@@ -459,6 +599,13 @@
                 android:textColor="#000000"
                 android:textSize="17sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="breaking load (n/mm)">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/breaking_load"
                 android:layout_width="match_parent"
@@ -467,6 +614,13 @@
                 android:hint="breaking load (n/mm)"
                 android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min belt width (mm)">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/min_belt_width"
                 android:layout_width="match_parent"
@@ -474,6 +628,13 @@
                 android:ems="10"
                 android:hint="min belt width (mm)"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="belt width (mm)">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/belt_width"
@@ -493,6 +654,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="belt width based on loaded volume (mm)">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/belt_width2"
@@ -545,6 +713,13 @@
                 android:layout_height="wrap_content"
                 android:text="" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="impact factor ex: 1.03">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/impact_factor"
                 android:layout_width="wrap_content"
@@ -563,12 +738,26 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="utilisation ex: 12 (hr/day)">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/utilisation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="utilisation ex: 12 (hr/day)"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="service factor ex: 1.1">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/service_factor"
@@ -587,6 +776,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="environment factor ex: 1">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/environment_factor"
@@ -617,6 +813,13 @@
                 android:layout_height="wrap_content"
                 android:text="" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="participation factor in upper ex: 0.65 (deg)">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/participation_factor_in_upper"
                 android:layout_width="wrap_content"
@@ -637,10 +840,15 @@
 
 
             <TextView
-                android:id="@+id/load_on_the_roller_carrying_the_most_force"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="load on the roller carrying the most force" />
+
+            <TextView
+                android:id="@+id/load_on_the_roller_carrying_the_most_force"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -652,6 +860,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="speed factor ex: 0.97">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/speed_factor"
@@ -683,6 +898,13 @@
                 android:layout_height="wrap_content"
                 android:text="" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="return troughing set with a transom side roller angle">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/return_troughing_set_with_a_transom_side_roller_angle"
                 android:layout_width="match_parent"
@@ -690,6 +912,13 @@
                 android:ems="10"
                 android:hint="return troughing set with a transom side roller angle"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="participation factor in return">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/participation_factor_in_return"
@@ -700,10 +929,15 @@
                 android:inputType="numberDecimal" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="load on the rollers of the return roller set is:" />
+
+            <TextView
                 android:id="@+id/load_on_the_rollers_of_the_return_roller_set"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="load on the rollers of the return roller set" />
+                android:text="" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -713,6 +947,13 @@
                 android:text="Tangential force, driving power, passive resistance, belt weight, tensions and checks"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="diameter of rollers">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/diameter_of_rollers"
@@ -733,6 +974,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="belt kind ex: 1">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/belt_kind"
                 android:layout_width="match_parent"
@@ -740,6 +988,13 @@
                 android:ems="10"
                 android:hint="belt kind ex: 1"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="textile core EP ex: 1">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/textile_core_EP"
@@ -749,6 +1004,13 @@
                 android:hint="textile core EP ex: 1"
                 android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" steel core ST ex: 2">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/steel_core_ST"
                 android:layout_width="match_parent"
@@ -756,6 +1018,13 @@
                 android:ems="10"
                 android:hint=" steel core ST ex: 2"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belt core weight ex:3 (kg/m2)">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/Belt_core_weight"
@@ -776,6 +1045,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="thickness of belt ex: 6(mm)">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/thickness_of_belt"
                 android:layout_width="match_parent"
@@ -795,6 +1071,13 @@
                 android:layout_height="wrap_content"
                 android:text="" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="working condition ex: 1">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/working_condition"
                 android:layout_width="match_parent"
@@ -802,6 +1085,13 @@
                 android:ems="10"
                 android:hint="working condition ex: 1"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coefficient of internal friction ex: 0.017">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/Coefficient_of_internal_friction"
@@ -822,6 +1112,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coefficient of fixed resistance ex: 1.5">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/Coefficient_of_fixed_resistance"
                 android:layout_width="match_parent"
@@ -841,6 +1138,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="temperature ex: 20 deg">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/temperature"
                 android:layout_width="match_parent"
@@ -848,6 +1152,13 @@
                 android:ems="10"
                 android:hint="temperature ex: 20 deg"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coefficient of passive resistance ex: 1">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/Coefficient_of_passive_resistance"
@@ -869,22 +1180,44 @@
                 android:background="@color/view" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weight of upper rotating parts is:" />
+
+            <TextView
                 android:id="@+id/Weight_of_upper_rotating_parts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Weight of upper rotating parts" />
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weight of lower rotating parts is:" />
 
             <TextView
                 android:id="@+id/Weight_of_lower_rotating_parts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Weight of lower rotating parts" />
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weight material per linear metre" />
 
             <TextView
                 android:id="@+id/Weight_material_per_linear_metre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Weight material per linear metre" />
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Maximum advised pitch of troughing sets ex: 0.8 (m)">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/Maximum_advised_pitch_of_troughing_sets"
@@ -894,6 +1227,13 @@
                 android:hint="Maximum advised pitch of troughing sets ex: 0.8 (m)"
                 android:inputType="numberDecimal" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="weight of upper rotating ex: 17.8 kg">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/weight_of_upper_rotating"
                 android:layout_width="match_parent"
@@ -901,6 +1241,13 @@
                 android:ems="10"
                 android:hint="weight of upper rotating ex: 17.8 kg"
                 android:inputType="numberDecimal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="weight of lower rotating ex: 13.3 kg">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/weight_of_lower_rotating"
@@ -921,6 +1268,13 @@
                 android:layout_height="3dp"
                 android:background="@color/view" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height change of belt ex: 15 m">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/Height_change_of_belt"
                 android:layout_width="match_parent"
@@ -930,10 +1284,22 @@
                 android:inputType="numberDecimal" />
 
             <TextView
-                android:id="@+id/rise_or_fall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="rise + or fall -" />
+
+            <TextView
+                android:id="@+id/rise_or_fall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="center to center ex: 150 m">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/center_to_center"
@@ -944,22 +1310,37 @@
                 android:inputType="numberDecimal" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tangential force of the belt upper strand (daN) is:" />
+
+            <TextView
                 android:id="@+id/tangential_force_of_the_belt_upper_strand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tangential force of the belt upper strand" />
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tangential force of the belt lower strand (daN) is:" />
 
             <TextView
                 android:id="@+id/tangential_force_of_the_belt_lower_strand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tangential force of the belt lower strand" />
+                android:text="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tangential force (N)" />
 
             <TextView
                 android:id="@+id/Tangential_force"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tangential force" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/section4_title"
@@ -971,6 +1352,13 @@
                 android:textColor="#000000"
                 android:textSize="20sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="efficiency of the reduction ex: 0.86 m">
+
+            </TextView>
+
             <EditText
                 android:id="@+id/efficiency_of_the_reduction"
                 android:layout_width="match_parent"
@@ -980,10 +1368,15 @@
                 android:inputType="numberDecimal" />
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Driving power (kW) is:" />
+
+            <TextView
                 android:id="@+id/Driving_power"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Driving power" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/section5_title"

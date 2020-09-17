@@ -147,6 +147,419 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void update_Driving_power() {
+        int inputNumber = 3;
+        View[] views = {Tangential_force,
+                v_max_from_table,
+                efficiency_of_the_reduction
+        };
+        String[] defaults = {"2376.944091", "2.3", "0.86"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = (doubleValues[0] * doubleValues[1]) / (100 * doubleValues[2]);
+            stringAns = String.valueOf(doubleAns);
+            Driving_power.setText(stringAns);
+        }
+    }
+
+    public void update_Tangential_force() {
+        int inputNumber = 2;
+        View[] views = {tangential_force_of_the_belt_upper_strand,
+                tangential_force_of_the_belt_lower_strand
+        };
+        String[] defaults = {"2468.8392", "-91.8951"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / doubleValues[1];
+            stringAns = String.valueOf(doubleAns);
+            Tangential_force.setText(stringAns);
+        }
+    }
+
+    public void update_tangential_force_of_the_belt_lower_strand() { //F200 = 1.5 is not assigned in phase 1
+        int inputNumber = 8;
+        View[] views = {Height_change_of_belt, //F88 value 0
+                center_to_center, //F90 value 1
+                Coefficient_of_fixed_resistance, //F79 value 2
+                Coefficient_of_passive_resistance, //F81 value 3
+                Coefficient_of_internal_friction, //F77 value 4
+                Belt_weight_per_linear_metre, //F74 value 5
+                Weight_of_lower_rotating_parts, //F83 value 6
+                Weight_of_upper_rotating_parts, //F82 value 7
+
+        };
+        String[] defaults = {"15", "150", "1.5", "1", "0.017", "9.9", "4.333333", "14.83333"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            if (doubleValues[0] > 0) {
+                doubleAns = (doubleValues[1] * doubleValues[2] * doubleValues[3] * doubleValues[4] * (doubleValues[5] + doubleValues[6]) - (doubleValues[5] * doubleValues[0])) * 0.981;
+            } else {
+                doubleAns = (1.5 * doubleValues[2] * doubleValues[3] * doubleValues[4] * (doubleValues[5] + doubleValues[6]) + (doubleValues[5] * doubleValues[0])) * 0.981;
+            }
+            stringAns = String.valueOf(doubleAns);
+            tangential_force_of_the_belt_lower_strand.setText(stringAns);
+        }
+    }
+
+
+    public void update_tangential_force_of_the_belt_upper_strand() { //F200 = 1.5 is not assigned in phase 1
+        int inputNumber = 8;
+        View[] views = {Height_change_of_belt, //F88 value 0
+                center_to_center, //F90 value 1
+                Coefficient_of_fixed_resistance, //F79 value 2
+                Coefficient_of_passive_resistance, //F81 value 3
+                Coefficient_of_internal_friction, //F77 value 4
+                Belt_weight_per_linear_metre, //F74 value 5
+                Weight_material_per_linear_metre, //F84 value 6
+                Weight_of_upper_rotating_parts, //F82 value 7
+
+        };
+        String[] defaults = {"15", "150", "1.5", "1", "0.017", "9.9", "120.77294", "14.83333"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            if (doubleValues[0] > 0) {
+                doubleAns = (doubleValues[1] * doubleValues[2] * doubleValues[3] * doubleValues[4] * (doubleValues[5] + doubleValues[6] + doubleValues[7]) + doubleValues[0] * (doubleValues[6] + doubleValues[5])) * 0.981;
+            } else {
+                doubleAns = (1.5 * doubleValues[2] * doubleValues[3] * doubleValues[4] * (doubleValues[5] + doubleValues[6] + doubleValues[7]) - doubleValues[0] * (doubleValues[6] + doubleValues[5])) * 0.981;
+            }
+            stringAns = String.valueOf(doubleAns);
+            tangential_force_of_the_belt_upper_strand.setText(stringAns);
+        }
+    }
+
+    public void update_rise_or_fall() {
+        int inputNumber = 1;
+        View[] views = {Height_change_of_belt
+        };
+        String[] defaults = {"15"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            if (doubleValues[0] > 0) {
+                stringAns = "+";
+            } else {
+                stringAns = "-";
+            }
+            rise_or_fall.setText(stringAns);
+        }
+    }
+
+    public void update_Weight_material_per_linear_metre() {
+        int inputNumber = 2;
+        View[] views = {load_capacity_of_the_belt,
+                v_max_from_table
+        };
+        String[] defaults = {"1000", "2.3"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / 3.0;
+            stringAns = String.valueOf(doubleAns);
+            Weight_material_per_linear_metre.setText(stringAns);
+        }
+    }
+
+    public void update_Weight_of_lower_rotating_parts() { //F199 was not assigned in phase 1
+        int inputNumber = 1;
+        View[] views = {weight_of_lower_rotating
+
+        };
+        String[] defaults = {"13.3"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / 3.0;
+            stringAns = String.valueOf(doubleAns);
+            Weight_of_lower_rotating_parts.setText(stringAns);
+        }
+    }
+
+    public void update_Weight_of_upper_rotating_parts() { //F198 was not assigned in phase 1
+        int inputNumber = 1;
+        View[] views = {weight_of_upper_rotating
+
+        };
+        String[] defaults = {"17.8"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] / 1.2;
+            stringAns = String.valueOf(doubleAns);
+            Weight_of_upper_rotating_parts.setText(stringAns);
+        }
+    }
+
+    public void update_Belt_weight_per_linear_metre() {
+        int inputNumber = 2;
+        View[] views = {Belt_core_weight,
+                thickness_of_belt,
+        };
+        String[] defaults = {"3", "6"};
+
+        if (defaults.length != inputNumber && views.length != inputNumber) {
+            Toast.makeText(this, "check default values", Toast.LENGTH_LONG).show();
+        } else {
+            String[] stringValues = new String[inputNumber];
+            double[] doubleValues = new double[inputNumber];
+
+            //if an edit view is empty I'll put default value
+            for (int i = 0; i < inputNumber; i++) {
+                String text = "";
+                if (views[i].getClass().equals(material_edit.getClass())) {
+                    EditText view = (EditText) views[i];
+                    text = view.getText().toString();
+                } else if (views[i].getClass().equals(load_capacity_of_the_belt_final.getClass())) {
+                    TextView view = (TextView) views[i];
+                    text = view.getText().toString();
+                }
+                if (text.isEmpty()) {
+                    stringValues[i] = defaults[i];
+
+                } else {
+                    stringValues[i] = text;
+                }
+                if (checkDouble(stringValues[i])) {
+                    doubleValues[i] = Double.parseDouble(stringValues[i]);
+                }
+            }
+            String stringAns;
+            double doubleAns;
+
+            //now play with values:
+            doubleAns = doubleValues[0] + doubleValues[1] * 1.15;
+            stringAns = String.valueOf(doubleAns);
+            Belt_weight_per_linear_metre.setText(stringAns);
+        }
+    }
+
     public void update_load_on_the_rollers_of_the_return_roller_set() {
         int inputNumber = 2;
         View[] views = {dynamic_load_on_the_return_roller_set,
@@ -191,7 +604,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void update_dynamic_load_on_the_return_roller_set() { // F199 was not assigned here on phase 1
-        int inputNumber = 2;
+        int inputNumber = 4;
         View[] views = {static_load_on_the_return_roller_set,
                 service_factor,
                 environment_factor,
@@ -936,6 +1349,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFocusChange(View view, boolean b) {
                 update_loaded_volume1();
                 update_static_load();
+                update_Weight_material_per_linear_metre();
+                update_Driving_power();
             }
         });
 
@@ -950,6 +1365,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View view, boolean b) {
                 update_load_capacity_of_the_belt_final();
+                update_Weight_material_per_linear_metre();
             }
         });
 
@@ -1129,14 +1545,14 @@ public class MainActivity extends AppCompatActivity {
         Belt_core_weight.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_Belt_weight_per_linear_metre();
             }
         });
 
         thickness_of_belt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_Belt_weight_per_linear_metre();
             }
         });
 
@@ -1150,14 +1566,16 @@ public class MainActivity extends AppCompatActivity {
         Coefficient_of_internal_friction.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
 
         Coefficient_of_fixed_resistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
 
@@ -1171,7 +1589,8 @@ public class MainActivity extends AppCompatActivity {
         Coefficient_of_passive_resistance.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
 
@@ -1185,35 +1604,38 @@ public class MainActivity extends AppCompatActivity {
         weight_of_upper_rotating.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_Weight_of_upper_rotating_parts();
             }
         });
 
         weight_of_lower_rotating.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_Weight_of_lower_rotating_parts();
             }
         });
 
         Height_change_of_belt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_rise_or_fall();
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
 
         center_to_center.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
 
         efficiency_of_the_reduction.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-
+                update_Driving_power();
             }
         });
 
@@ -1255,6 +1677,106 @@ public class MainActivity extends AppCompatActivity {
         clickToOpenPdf(roller_button, "roler_set.pdf");
 
         clickToOpenPdf(physical_characteristics_button, "physical_properties.pdf");
+
+        Tangential_force.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                update_Driving_power();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        tangential_force_of_the_belt_lower_strand.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_Tangential_force();
+            }
+        });
+        tangential_force_of_the_belt_upper_strand.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_Tangential_force();
+            }
+        });
+
+        Weight_of_lower_rotating_parts.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_tangential_force_of_the_belt_lower_strand();
+            }
+        });
+        Weight_of_upper_rotating_parts.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
+            }
+        });
+        Weight_material_per_linear_metre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                update_tangential_force_of_the_belt_upper_strand();
+            }
+        });
 
         dynamic_load_on_the_return_roller_set.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1336,6 +1858,8 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 update_static_load();
                 update_static_load_on_the_return_roller_set();
+                update_tangential_force_of_the_belt_upper_strand();
+                update_tangential_force_of_the_belt_lower_strand();
             }
         });
         loaded_volume1.addTextChangedListener(new TextWatcher() {
