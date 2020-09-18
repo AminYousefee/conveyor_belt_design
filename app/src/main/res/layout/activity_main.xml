@@ -581,7 +581,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="modified loaded volume based on belt width (IVM) (m3/hr)" />
+                android:text="modified loaded volume based on given belt width (IVM) (m3/hr)" />
 
             <TextView
                 android:id="@+id/modified_loaded_volume2"
@@ -951,7 +951,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="diameter of rollers">
+                android:text="diameter of rollers (mm) ex: 108 mm ">
 
             </TextView>
 
@@ -960,7 +960,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="diameter of rollers"
+                android:hint="diameter of rollers ex: 108 mm"
                 android:inputType="numberDecimal" />
 
             <Button

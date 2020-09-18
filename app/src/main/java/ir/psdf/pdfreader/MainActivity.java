@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
             double doubleAns;
 
             //now play with values:
-            doubleAns = doubleValues[0] / doubleValues[1];
+            doubleAns = doubleValues[0] + doubleValues[1];
             stringAns = String.valueOf(doubleAns);
             Tangential_force.setText(stringAns);
         }
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
             double doubleAns;
 
             //now play with values:
-            doubleAns = doubleValues[0] / 3.0;
+            doubleAns = doubleValues[0] / (3.6 * doubleValues[1]);
             stringAns = String.valueOf(doubleAns);
             Weight_material_per_linear_metre.setText(stringAns);
         }
@@ -824,7 +824,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void update_modified_loaded_volume2() {
         int inputNumber = 3;
-        View[] views = {loaded_volume1,
+        View[] views = {loaded_volume2,
                 correction_factor,
                 factor_of_inclination
         };
@@ -1691,7 +1691,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                update_Driving_power();
             }
         });
 
